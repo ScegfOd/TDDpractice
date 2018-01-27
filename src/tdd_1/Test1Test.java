@@ -5,17 +5,17 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class Test1Test {
-	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-	private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+	private final static ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	private final static ByteArrayOutputStream errContent = new ByteArrayOutputStream();
 
-	@Before
-	public void setUpStreams() {
+	@BeforeAll
+	static void setUpStreams() {
 	    System.setOut(new PrintStream(outContent));
 	    System.setErr(new PrintStream(errContent));
 	}
@@ -23,14 +23,14 @@ class Test1Test {
 	@Test
 	@DisplayName("WHAT!? (╯°□°)╯︵ ┻━┻")
 	void testMain() {
-		setUpStreams();
+		//setUpStreams();
 		Test1.main(null);
-		restoreStreams();
+		//restoreStreams();
 		assertEquals("testing testing 123\ntesting testing 456\n", outContent.toString());
 	}
 
-	@After
-	public void restoreStreams() {
+	@AfterAll
+	static void restoreStreams() {
 	    System.setOut(System.out);
 	    System.setErr(System.err);
 	}
